@@ -1,0 +1,107 @@
+body
+{
+  margin: 0; /* Прибираю відступи від країв */
+}
+.Contacts
+{
+  font-size: 25px;
+  border-radius: 0 10px 10px 0; /* Закруглення кутів  */
+  width: 300px; /* Ширина болоку */
+  background: #ffe6ac; /* Колір фону */
+  position: fixed; /* Фіксація на одному місці  */
+  top: 300px;
+  left: -320px;
+  border-right: 25px solid #fc0; /* Частина яку має бути видно "Contacts" */
+  padding: 10px;
+
+  transition: left 1s; /* Властивість що встановлює ефект переходу між двома станами  */
+}
+
+.Contacts img
+{
+  float: left; /* Щоб картинка була зліва */
+  margin: 5px;
+}
+
+.text
+{
+  font-family: "Times New Roman";
+  font-size: 20px;
+  position: absolute; /* Абсолютне позиціонування */
+  right: -45px; top: 30px; /* Задаю позицію для напису */
+  transform: rotate(270deg); /* Кручу текст */
+  -webkit-transform: rotate(270deg);
+}
+.Contacts:hover /* працює при наведенні */
+{
+  left: 0; /* Вивожу div повністю */
+}
+
+
+
+
+
+
+
+
+
+/*
+<div class="items">    Contacts::after
+  <div class="item">
+
+    <p class="rotateText">Contacts</p>
+  </div>
+  <div class="info">
+    Доп. Инфо
+  </div>
+</div>
+
+.items
+{
+  width:60px;
+}
+
+.item
+{
+  position: relative;
+  width:40px;
+  height: 80px;
+  display: block;
+  border:1px solid gray;
+
+}
+
+.info {
+  position: absolute;
+  background: white;
+  top:0;
+  left: 0px;
+  display:none;
+
+  width:60px;
+  height:230px;
+  border:1px solid gray;
+  z-index: 100;
+}
+
+
+.items:hover .info
+{
+  display:block;
+}
+
+.items:hover .item
+{
+  display:block;
+  left: 100px;
+}
+
+.rotateText
+{
+
+
+
+
+}
+
+*/
