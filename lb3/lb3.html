@@ -1,0 +1,24 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport"
+        content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <script src="js.js"></script>
+  <title>Document</title>
+</head>
+<body>
+
+<img src="sobaka.png" id = "Foto1" width="189" height="255" alt="альтернативный текст" style="display: block">
+
+<input type="button" onclick=" changeFoto('Foto1', 'Foto2');" value="Вище"><input type="button" onclick=" changeFoto('Foto2', 'Foto1');" value="Нижче">
+<img src="jawa.jpg" id = "Foto2"  width="330" height="255" alt="альтернативный текст" style="display: block">
+<input type="button" onclick=" changeFoto('Foto2', 'Foto3');" value="Вище"><input type="button" onclick=" changeFoto('Foto3', 'Foto2');" value="Нижче">
+<img src="kover.jpg" id = "Foto3"  width="300" height="255" alt="альтернативный текст" style="display: block">
+<input type="radio" name="rad" value='Foto1'>Перша картинка <input type="radio" name="rad" value='Foto2'>Друга картинка <input type="radio" name="rad" value='Foto3'>Третя картинка<br>
+<input type="text" style=" width: 100px" id="w" value="Ширина">
+<input type="text" style="width: 100px" id="h" value="Висота">
+<input type="button"  onclick=" changeSize();" value="Змінити">
+</body>
+</html>
