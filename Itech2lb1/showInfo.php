@@ -1,22 +1,5 @@
 <?
-$db_driver="mysql"; $host = "localhost"; $database = "lb1var2";
-$dsn = "$db_driver:host=$host; dbname=$database";
-
-$username = "root"; $password = "root";
-$options = array(PDO::ATTR_PERSISTENT => true, PDO::
-MYSQL_ATTR_INIT_COMMAND => 'SET NAMES utf8');
-
-try 
-{
-    $dbh = new PDO ($dsn, $username, $password, $options);
-    
-    echo "Connected to database<br>";  
-    
-}
-catch (PDOException $e) 
-{
-    echo "Error!: " . $e->getMessage() . "<br/>"; die();
-}
+include 'conect.php';
 
 
     function getInfoCompTask($dbh, $date, $id_project) 
@@ -27,7 +10,7 @@ catch (PDOException $e)
         FROM worker JOIN work ON worker.id_worker = work.fid_worker 
         JOIN projects ON work.fid_projects=projects.id_projects
         WHERE work.description = 'completed' AND work.date = '$date' 
-        AND projects.id_projects = '$id_project'";
+        AND projects.name = '$id_project'";
 
 $output = "<table border='1' >";
 
@@ -54,8 +37,11 @@ $output .="  <tr> <th>ProjectWorker</th>  <th>Department</th>  <th>Status</th> <
 
     function getTotalTime($dbh, $id_project)
     {
-        $sql = "SELECT work.time_end , work.time_start FROM work WHERE work.fid_projects = '$id_project'";
-        foreach ($dbh->query($sql) as $row) 
+        
+       $sql = "SELECT work.time_end , work.time_start FROM work JOIN projects ON projects.id_projects=work.fid_projects WHERE projects.name = '$id_project'";
+
+       
+       foreach ($dbh->query($sql) as $row) 
         {$seconds = strtotime($row[time_end]) - strtotime($row[time_start]) ;}
 
         //echo "$seconds"."<br>";
@@ -78,13 +64,23 @@ $output .="  <tr> <th>ProjectWorker</th>  <th>Department</th>  <th>Status</th> <
 
     function getAmountOfEmployees($dbh, $chief)
     {
-        $sql = "SELECT COUNT(*) as 'amount' FROM worker JOIN department
-        on department.id_department = worker.fid_department
-        WHERE department.chief = '$chief'";
         
+        $stmt = $dbh->prepare ("SELECT COUNT(*) as 'amount' FROM worker JOIN department
+        on department.id_department = worker.fid_department
+        WHERE department.chief = :name");
+        //$smth->bindParam(":name",$chief);
+                
         echo "<bs>amount of employees: ";
-        foreach ($dbh->query($sql) as $row) 
-        {print $row['amount']; }       
+
+        if ($stmt->execute(array(':name' => $chief))) //$_GET['amount']
+        {
+            
+            while ($row = $stmt->fetch()) 
+            {
+              print_r($row[0]);
+            }
+        }
+      
         
     }
          
@@ -98,7 +94,8 @@ $output .="  <tr> <th>ProjectWorker</th>  <th>Department</th>  <th>Status</th> <
  }
  else if (array_key_exists('button3',$_POST))
  {
-    getAmountOfEmployees($dbh, $_POST['chief']); 
+     
+    getAmountOfEmployees($dbh, $_POST['num']); 
  }
  
 ?>
